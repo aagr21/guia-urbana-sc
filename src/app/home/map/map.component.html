@@ -1,0 +1,19 @@
+<div
+  leaflet
+  [leafletOptions]="options"
+  [leafletLayersControl]="layersControl"
+  [style]="styleMap()"
+  (leafletMapReady)="onMapReady($event)"
+>
+  @for(channelRoute of channelsRoutes; track channelRoute) {
+    <div [leafletLayer]="createPolyline(channelRoute)"></div>
+  }
+  @for(lineRoute of lineRoutesSelected; track lineRoute) {
+    <div [leafletLayer]="lineRoute"></div>
+  }
+</div>
+<leaflet-locate-control
+  [options]="locateOptions"
+  [map]="map"
+  (location$)="_onNewLocation($event)"
+></leaflet-locate-control>

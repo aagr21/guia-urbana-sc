@@ -1,0 +1,27 @@
+<p class="text-center py-4 font-medium flex justify-center">Canales de Transporte <span class="material-symbols-outlined">road</span></p>
+<div class="space-y-5">
+  <p>
+    <mat-slide-toggle [checked]="channelOptions.hide==selectedOption"
+                      (change)="selectOption($event, channelOptions.hide)">
+      &nbsp;&nbsp;No mostrar
+    </mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [checked]="channelOptions.all==selectedOption"
+                      (change)="selectOption($event, channelOptions.all)">
+      &nbsp;&nbsp;Todos
+    </mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [checked]="channelOptions.primaries==selectedOption"
+                      (change)="selectOption($event, channelOptions.primaries)">
+      &nbsp;&nbsp;Primarios
+    </mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [checked]="channelOptions.secondaries==selectedOption"
+                      (change)="selectOption($event, channelOptions.secondaries)">
+      &nbsp;&nbsp;Secundarios
+    </mat-slide-toggle>
+  </p>
+</div>
