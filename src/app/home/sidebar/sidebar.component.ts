@@ -4,6 +4,7 @@ import { MapService } from "@services/map.service";
 import { ChannelRoute, LineName } from "@models/interfaces";
 import { LinesComponent } from "@home/sidebar/lines/lines.component";
 import { FindLineRoute } from "@models/interfaces/line-route";
+import { NearbyLinesComponent } from "@home/sidebar/nearby-lines/nearby-lines.component";
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ import { FindLineRoute } from "@models/interfaces/line-route";
   imports: [
     ChannelsComponent,
     LinesComponent,
+    NearbyLinesComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
@@ -34,7 +36,7 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  activeSection = 1;
+  activeSection = 2;
   @Output() closingSidebar = new EventEmitter<void>();
   mapService = inject(MapService);
   @Output() changeChannelsRoutes = new EventEmitter<ChannelRoute[]>();

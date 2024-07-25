@@ -22,7 +22,7 @@ import { FormsModule } from "@angular/forms";
     FormsModule
   ],
   templateUrl: './lines.component.html',
-  styleUrl: './lines.component.scss'
+  styleUrl: './lines.component.scss',
 })
 export class LinesComponent implements OnDestroy {
   isSmallScreen = false;

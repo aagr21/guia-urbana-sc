@@ -1,36 +1,39 @@
-<p class="text-center py-4 font-medium flex justify-center">Micros <span class="material-symbols-outlined">directions_bus</span>
-</p>
-@if (linesNames.length > 0) {
-  <div class="text-center grid">
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        [(ngModel)]="searchText"
-        placeholder="Buscar línea"
-        autocomplete="off"
-        (input)="onSearchText(searchText)"
-      />
-    </mat-form-field>
-  </div>
-    <div class="grid grid-cols-2 gap-2">
-        @for (lineName of result; track lineName.id) {
-            <mat-card>
-                <div class="mt-3">
-                    <p class="text-center {{ isSmallScreen ? 'text-[10px]' : 'text-[14px]' }} font-medium">{{ lineName.name | titlecase }}</p>
-                </div>
-                <div class="image-container">
-                    <img [src]="lineName.imageUrl" alt="" class="text-center logo-micro">
-                </div>
-                <div class="{{ !isSmallScreen ? 'buttons-lg' : 'buttons-sm' }}">
-                    <button mat-raised-button class="mr-1 {{ !isSmallScreen ? 'button-lg' : 'button-sm' }} button-go"
-                            (click)="onLineSelected(lineName, 'IDA')">Ida
-                    </button>
-                    <button mat-raised-button
-                            class="ml-1 {{ !isSmallScreen ? 'button-lg' : 'button-sm' }} button-return"
-                            (click)="onLineSelected(lineName, 'VUELTA')">Vuelta
-                    </button>
-                </div>
-            </mat-card>
-        }
+<div class="h-screen overflow-y-auto">
+  <p class="text-center pt-4 pb-2 font-medium flex justify-center">Micros <span class="material-symbols-outlined">directions_bus</span>
+  </p>
+  @if (linesNames.length > 0) {
+    <div class="text-center grid">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          placeholder="Buscar línea"
+          autocomplete="off"
+          (input)="onSearchText(searchText)"
+        />
+      </mat-form-field>
     </div>
-}
+    <div class="grid grid-cols-2 gap-2">
+      @for (lineName of result; track lineName.id) {
+        <mat-card>
+          <div class="mt-3">
+            <p
+              class="text-center {{ isSmallScreen ? 'text-[10px]' : 'text-[14px]' }} font-medium">{{ lineName.name | titlecase }}</p>
+          </div>
+          <div class="image-container">
+            <img [src]="lineName.imageUrl" alt="" class="text-center logo-micro">
+          </div>
+          <div class="{{ !isSmallScreen ? 'buttons-lg' : 'buttons-sm' }}">
+            <button mat-raised-button class="mr-1 {{ !isSmallScreen ? 'button-lg' : 'button-sm' }} button-go"
+                    (click)="onLineSelected(lineName, 'IDA')">Ida
+            </button>
+            <button mat-raised-button
+                    class="ml-1 {{ !isSmallScreen ? 'button-lg' : 'button-sm' }} button-return"
+                    (click)="onLineSelected(lineName, 'VUELTA')">Vuelta
+            </button>
+          </div>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

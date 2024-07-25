@@ -13,18 +13,16 @@
       </button>
       <button (click)="setActiveSection(3)"
               class="flex items-center justify-center p-1 {{ activeSection == 3 ? 'bg-blue-600 text-white' : 'border-2 text-black' }} rounded-lg text-xs">
-        <span class="material-symbols-outlined">route</span>
+        <span class="material-symbols-outlined">explore_nearby</span>
       </button>
     </div>
   </div>
   <!-- Contenido dinámico -->
-  <div class="flex-grow pl-4 pr-2 overflow-y-auto">
-    @if (activeSection === 1) {
-      <app-channels (closingSidebar)="closingSidebar.emit()"
-                    (selectedOptionChange)="changeChannelsRoutesHandler($event)"/>
-    } @else if (activeSection === 2) {
-      <app-lines [linesNames]="linesNames" [result]="linesNames" (lineSelected)="_onLineSelected($event)"/>
-    } @else if (activeSection === 3) {
-    }
+  <div class="flex-grow pl-4 pr-2">
+    <app-channels [hidden]="activeSection !== 1" (closingSidebar)="closingSidebar.emit()"
+                  (selectedOptionChange)="changeChannelsRoutesHandler($event)"/>
+    <app-lines [hidden]="activeSection !== 2" [linesNames]="linesNames" [result]="linesNames"
+               (lineSelected)="_onLineSelected($event)"/>
+    <app-nearby-lines [hidden]="activeSection !== 3"/>
   </div>
 </div>
