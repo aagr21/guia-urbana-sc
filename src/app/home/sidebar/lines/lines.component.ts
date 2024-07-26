@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { LineName } from "@models/interfaces";
 import { MatCardModule } from "@angular/material/card";
-import { TitleCasePipe } from "@angular/common";
+import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
 import { MatButton } from "@angular/material/button";
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
@@ -19,7 +19,8 @@ import { FormsModule } from "@angular/forms";
     MatButton,
     MatFormField,
     MatInput,
-    FormsModule
+    FormsModule,
+    NgOptimizedImage
   ],
   templateUrl: './lines.component.html',
   styleUrl: './lines.component.scss',
