@@ -9,6 +9,7 @@
         placeholder="Buscar línea"
         autocomplete="off"
         (input)="onSearchText(searchText)"
+        class="{{isSmallScreen ? 'input-sm' :  'input-lg'}}"
       />
     </mat-form-field>
   </div>
