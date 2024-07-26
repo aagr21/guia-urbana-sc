@@ -2,7 +2,7 @@
   <p class="text-center pt-4 pb-2 font-medium flex justify-center">Micros <span class="material-symbols-outlined">directions_bus</span>
   </p>
   @if (linesNames.length > 0) {
-    <div class="text-center grid">
+    <div class="text-center grid pl-4 pr-2">
       <mat-form-field appearance="outline">
         <input
           matInput
@@ -13,7 +13,7 @@
         />
       </mat-form-field>
     </div>
-    <div class="grid grid-cols-2 gap-2 mb-4">
+    <div class="grid grid-cols-2 gap-2 mb-4 pl-4 pr-2">
       @for (lineName of result; track lineName.id) {
         <mat-card>
           <div class="mt-3">

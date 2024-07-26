@@ -18,7 +18,7 @@
     </div>
   </div>
   <!-- Contenido dinámico -->
-  <div class="flex-grow pl-4 pr-2">
+  <div class="flex-grow">
     <app-channels [hidden]="activeSection !== 1" (closingSidebar)="closingSidebar.emit()"
                   (selectedOptionChange)="changeChannelsRoutesHandler($event)"/>
     <app-lines [hidden]="activeSection !== 2" [linesNames]="linesNames" [result]="linesNames"
