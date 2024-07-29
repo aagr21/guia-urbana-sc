@@ -1,5 +1,8 @@
 import { Component, inject, Input, OnDestroy } from '@angular/core';
-import { LeafletControlLayersConfig, LeafletModule } from "@bluehalo/ngx-leaflet";
+import {
+  LeafletControlLayersConfig,
+  LeafletModule,
+} from '@bluehalo/ngx-leaflet';
 import {
   Control,
   latLng,
@@ -10,24 +13,22 @@ import {
   LeafletEvent,
   LocationEvent,
   polyline,
-  Polyline
-} from "leaflet";
-import { Observable, Subscription, tap, map } from "rxjs";
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { NgxLeafletLocateModule } from "@runette/ngx-leaflet-locate";
-import { ChannelRoute } from "@models/interfaces";
-import { FindLineRoute } from "@models/interfaces/line-route";
-import { MapService } from "@services/map.service";
+  Polyline,
+  Layer,
+} from 'leaflet';
+import { Observable, Subscription, tap, map } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { NgxLeafletLocateModule } from '@runette/ngx-leaflet-locate';
+import { ChannelRoute } from '@models/interfaces';
+import { FindLineRoute } from '@models/interfaces/line-route';
+import { MapService } from '@services/map.service';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [
-    LeafletModule,
-    NgxLeafletLocateModule
-  ],
+  imports: [LeafletModule, NgxLeafletLocateModule],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.scss'
+  styleUrl: './map.component.scss',
 })
 export class MapComponent implements OnDestroy {
   options: MapOptions = {
@@ -39,39 +40,47 @@ export class MapComponent implements OnDestroy {
       }),
     ],
     zoom: 13,
-    center: latLng(-17.779223, -63.181640),
+    center: latLng(-17.779223, -63.18164),
     attributionControl: false,
     maxBoundsViscosity: 1.0,
     zoomAnimation: true,
   };
 
-  layersControl: LeafletControlLayersConfig = {
-    baseLayers: {
-      'Google Maps': tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+  baseLayers: {
+    [name: string]: Layer;
+  } = {
+    'Google Maps': tileLayer(
+      'https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+      {
         maxZoom: 22,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-      }),
-      'Google Satellite': tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+      }
+    ),
+    'Google Satellite': tileLayer(
+      'https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',
+      {
         maxZoom: 22,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-      }),
-      'Open Street Map': tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      }
+    ),
+    'Open Street Map': tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
         maxZoom: 20,
-      }),
-    },
-    overlays: {},
+      }
+    ),
   };
+
   myLocation?: LatLng;
   map!: Map;
   lineRoutesSelected: Polyline[] = [];
 
-
   constructor() {
-    this.subscription = this.breakpointObserver.observe([
-      Breakpoints.HandsetPortrait
-    ]).subscribe(result => {
-      this.isSmallScreen = result.matches;
-    });
+    this.subscription = this.breakpointObserver
+      .observe([Breakpoints.HandsetPortrait])
+      .subscribe((result) => {
+        this.isSmallScreen = result.matches;
+      });
   }
 
   @Input() channelsRoutes: ChannelRoute[] = [];
@@ -110,7 +119,7 @@ export class MapComponent implements OnDestroy {
 
   styleMap(): string {
     if (this.isSmallScreen) {
-      return "height: calc(100% - 155.43px); width: 100%";
+      return 'height: calc(100% - 155.43px); width: 100%';
     } else {
       return 'height: calc(100% - 139.58px); width: 100%;';
     }
@@ -135,7 +144,7 @@ export class MapComponent implements OnDestroy {
   lineSelected(findLineRoute: FindLineRoute): Observable<void> {
     this.lineRoutesSelected = [];
     return this.mapService.findLineRoutesByName(findLineRoute).pipe(
-      tap(response => {
+      tap((response) => {
         const coordinates = response.geom.coordinates.map((coordinate) =>
           latLng(coordinate[1], coordinate[0])
         );
